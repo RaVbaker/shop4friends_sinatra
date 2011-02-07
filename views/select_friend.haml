@@ -1,0 +1,60 @@
+%p.center
+  Hi 
+  %strong= @me['first_name']+"!"
+  Now you can find out what is the best gift for your friends.
+  
+%p.center Just type their name to filter and click on link
+
+.center 
+  For who you want to shop
+  %input#name{:type => "text", :placeholder => "Type here"} 
+
+%ul#friends
+  - @friends['data'][@begin,@limit].each do |friend|
+    %li{'data-name' => friend['name'].downcase} 
+      
+      %a.name{:href=> "/#{friend['id']}" }
+        %img{'data-src' => @fb.photo_url(friend['id']), :src => "/images/empty.gif"}
+        = friend['name'] 
+                                                
+- if @friends['data'][@begin+@limit+1]
+  %a{:href=>"?start=#{@begin+@limit}"} Następne...
+
+
+:javascript
+  $(function(){
+    var name = $('#name'),
+        friends = $('#friends li'),
+        loadImages = function(start) {
+          var start = start || 0;
+          $('#friends li:visible img').slice(start, start+12).each(function(i,dom_el){
+            var el = $(dom_el);
+            if (el.attr('src') === '/images/empty.gif'){
+              el.attr('src', el.attr('data-src'));
+            }
+          });
+        };
+        
+    name.focus();
+    loadImages();
+                                                 
+    // loadImages on scroll
+    $('#friends').scroll(function() {
+      var height = $(this).height(), 
+      scrollTop = this.scrollTop+height;
+      if (scrollTop > height) {                  
+        loadImages(parseInt((scrollTop/height)*12,10));
+      }
+    });
+    
+    name.keyup(function(ev){           
+      var what = name.val().toLowerCase();
+      if (what.length == 0) {
+        friends.show();
+        return;
+      }
+      friends.hide();
+      $('#friends li[data-name*="'+what+'"]').show();
+      loadImages();
+    });
+  });

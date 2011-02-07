@@ -1,0 +1,74 @@
+%div.right_photo
+  %img{:src=>@fb.photo_url(@user['id'])+"?type=large"}
+
+%h2= "Great stuff for "+@user["name"]
+                    
+
+
+%p               
+  Thanks 
+  %strong= @me['first_name']
+  for being patient.
+  Here you have some products in which
+  = @user['first_name']
+  may be interested. 
+  
+%p 
+  Anytime you can buy them on 
+  %a{:href=>"http://amazon.co.uk"} Amazon Online Store. 
+  
+%h3.center Good luck and have a nice shopping!          
+
+%small
+  %a{:href => "/select_friend"} &laquo; Ok, Thanks. I want to find a gift for someone else.
+
+%ul#likes
+  - @likes.each do |like|
+    - if like['gifts']
+      %li.like_phrase
+        = @user['first_name'] 
+        likes 
+        %strong 
+          %a{:href=> like['link']}= like['name'] 
+        = "("+like['category']+")"
+        , we suggest:
+        %ol
+          - like['gifts']['Item'][0..2].each do |item|
+            %li.item                                                                                   
+              - if item['SmallImage']
+                %a.photo{:href => item['ItemLinks']['ItemLink'].last['URL'], :title => item['ItemAttributes']['Title']}
+                  %img{:src=> item['SmallImage']['URL'], :alt => item['ItemAttributes']['Title']}
+              %h3 
+                %a{:href => item['ItemLinks']['ItemLink'].last['URL']}= item['ItemAttributes']['Title']
+              - item['ItemAttributes'].each do |attrib, value|
+                - unless attrib.eql? "Title"
+                  %div 
+                    - if attrib != '__content__' and attrib != 'Units'
+                      %strong= attrib+": "
+                    - if value.is_a?(String)
+                      %span= value       
+                    - elsif value.is_a?(Array)
+                      %span= value.map{|v| (v.is_a?(String) and v) or (v['Role']+' '+v['__content__']) }.join(", ")
+                    - elsif value.is_a?(Hash)
+                      %span= value['Role']+" "+value['__content__']
+                        
+              - if item['OfferSummary'] and item['OfferSummary']['LowestNewPrice']
+                .price
+                  Price:
+                  %strong= item['OfferSummary']['LowestNewPrice']['FormattedPrice'] 
+              .right
+                %button{:href => item['ItemLinks']['ItemLink'][2]['URL']} Check out some reviews.
+                or
+                %button{:href => item['ItemLinks']['ItemLink'].last['URL']} Buy now on Amazon!
+              
+              = p(item)
+
+:javascript
+  $(function(){
+    $('button').click(function(){
+      var el = $(this);
+      if (el.attr('href') != '') {
+        window.location.href = el.attr('href');
+      }
+    });
+  })

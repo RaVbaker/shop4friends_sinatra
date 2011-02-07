@@ -1,0 +1,20 @@
+.center
+  Loading...
+:javascript
+  $(function(){
+   var hash = window.location.hash.substring(1).split('&'),
+       params = {},
+       setCookie = function(c_name,value,exdays) {
+         var exdate=new Date();
+         exdate.setDate(exdate.getDate() + exdays);
+         var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+         document.cookie=c_name + "=" + c_value;
+       };
+   
+   for(var i in hash) {
+     var data = hash[i].split('=');
+     params[data[0]] = decodeURI(data[1]);
+     setCookie(data[0], decodeURI(data[1]));
+   }
+   window.location.href="/select_friend";
+  });                            

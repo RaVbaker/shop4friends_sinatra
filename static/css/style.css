@@ -1,0 +1,166 @@
+body {
+  width: 100%;
+  margin: 0;
+  background-color: #eee;
+  color: #000;   
+  font-family: Verdana, arial, sans-serif;
+  font-size: 14px;
+}            
+
+a {
+  color: #000;
+}       
+
+a:hover, a:visited {
+  color: #999;
+}
+
+div {       
+  padding: 0;
+  margin: 0;
+}
+
+#wrapper {
+  padding: 0;   
+  
+}           
+
+header {
+/*  background-color: #3B5998; */
+background-color: #999;
+  color: #fff;
+  overflow: hidden;
+}            
+
+section#head, section#content {
+  margin: 0 auto;
+  width: 960px;
+  overflow:hidden;
+}
+
+header ul.menu {
+  list-style: none;
+  float:right;    
+  width: 300px;
+  font-size: 13px;    
+}             
+
+ul.menu li {
+  width: 150px;
+  float:left; 
+}
+
+ul.menu a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}                       
+
+ul.menu li a:hover {
+  text-decoration: underline;
+  cursor: pointer;           
+}
+              
+h1, h1 a  {        
+  float:left;  
+  margin:0 auto;
+  
+  width: 250px;
+/*  text-align: center;*/
+  font-family: 'Lobster', arial, serif;
+  
+  color: #fff !important;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: normal;
+  text-shadow: #000 2px 2px;
+  padding: 4px;
+/*  border-radius: 8px; */
+/*  box-shadow:  2px 3px 2px #000;*/
+}
+                                       
+section#content {
+  border: 1px solid #b3b3b3;
+  border-top: none;
+  padding: 9px;        
+  padding-bottom: 30px;
+}
+
+footer {
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}                   
+.right {
+  text-align: right;
+}
+
+.right_photo {
+  text-align: right;
+  float:right;
+  margin: 30px;
+}           
+
+.right_photo img {
+  border: 1px solid #999;
+  padding: 4px;
+}
+        
+input#name {
+  height: 18px;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+ul#friends {      
+  list-style:none;
+  width: 420px;
+  height: 300px;
+  border: 1px solid #999;
+  margin:0 auto;
+  overflow: hidden;
+  overflow-y: auto;
+  padding: 9px;
+}
+
+ul#friends li {
+  width: 95px;
+  height: 95px;
+  text-align:center;
+  border: 1px solid #999;
+  margin: 1px;
+  float:left;
+  overflow:hidden;
+}                
+ul#friends li a.name {
+  font-size: 10px;
+}
+
+ul#friends li img {
+  display:block;
+  width: 50px;
+  height: 50px;
+  margin:0 auto;
+  margin-top: 7px;
+}
+
+li.like_phrase {
+  margin-bottom: 24px;
+}      
+li.item {
+  overflow:hidden;
+  border: 1px solid #999;
+  border-top: none;
+  border-left: none;
+  margin: 8px;
+  padding: 7px;
+  margin-bottom: 20px;
+}
+
+li.item .photo {
+  float: right;
+  padding: 2px;
+  border: 1px solid #999;
+}
