@@ -45,7 +45,7 @@ get '/' do
 end
 
 get '/login' do
-  redirect fb.auth_url
+  redirect @fb.auth_url
 end           
 
 get '/auth' do                                                                               
