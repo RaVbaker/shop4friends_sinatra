@@ -15,7 +15,6 @@ fb = SimpleFB.new(
   :api_key  => 'aac29c38637b6351a2694f551adf4756',
   :secret   => '1a48af091b8cfdd32b344f99706295f8',
   :app_id   => 191820210836125, 
-  :redirect_uri => "http://localhost:4567/auth",
   :scope => "email,user_about_me,user_events,friends_activities,user_activities,friends_hometown,friends_interests,friends_likes,friends_location,friends_status,friends_checkins"
 )
      
@@ -31,7 +30,8 @@ search = Gifts.new(
 
 #app:         
 
-before {                                                           
+before {               
+  fb.params[:redirect_uri] = "http://#{request.host}#{':'+request.port.to_s if request.port != 80}/auth"
   # load FB accesstoken and code if exists
   fb.code = session[:code] if session[:code] && !params[:code]
   fb.access_token = session[:access_token] if !params[:code] && session[:access_token]
