@@ -3,18 +3,18 @@ require 'sinatra'
 
                    
 # app config:
-set :public, File.dirname(__FILE__) + '/static'
+set :public_folder, File.dirname(__FILE__) + '/static'
 set :haml, :format => :html5
 enable :sessions
 
 #fb config:   
 
-require 'simplefb'
+require_relative 'simplefb'
 
      
 
 #amazon config:
-require 'gifts'
+require_relative 'gifts'
 
 search = Gifts.new(
   :locale => :uk,
